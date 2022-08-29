@@ -16,7 +16,7 @@ print("*************************************")
 
 
 time.sleep(2)
-print("\n1.String To Hash Converter\n2.Password Strength Checker\n3.Random Password Genrator\n4.Password Guessing")
+print("\n1.String To Hash Converter\n2.Password Strength Checker\n3.Random Password Genrator\n4.Create Strong Password")
 
 
 userinput = int(input("\n>Enter Your Choice : "))
@@ -80,15 +80,28 @@ def fun3():
 
 	password = "".join(random.sample(all,length))
 
-	print("Genrating password.....")
-	time.sleep(3)
-	print("Random password is : "+password)
+	if passlength <= 8:
+		print("Password must be greater than 8 !")
 
+	else:
+		print("Genrating password.....\n")
+		time.sleep(2)
+		print("Password Is : "+password )
+		print("")
+
+
+		for i in range(passlength):
+			time.sleep(0.3)
+			print("Shuffling password : "+password[i])
+
+		time.sleep(1)
+		password2 = "".join(random.sample(password,length))
+		print("\nRandom strong password is : "+password2)
 
 
 def fun4():
 	
-	print("\n4] Password Guessing\n")
+	print("\n4] Create Strong Password \n")
 
 	name = input(">Enter Any Name ,Target Name (no commas) :")
 	pet_name = input(">Enter Any Pet Name (no commas) :")
@@ -104,7 +117,16 @@ def fun4():
 
 	r1 = "".join(random.sample(guess,length))
 
-	print("\nGuessed Password Is :" + r1)
+
+	if len(r1) <= 8:
+		print("\nPassword must be greater than 8 !")
+
+	else:
+		print("\nCreating strong password...")
+		time.sleep(2)
+		print("\nYour Strong Password Is :" + r1)
+		
+		
 	
 ##########################################################
 
