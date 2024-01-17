@@ -1,143 +1,96 @@
-#Python Password Manager Tool
-
 import hashlib
 import random
 import time
 
-print("\n\n")
-print("************************************")
-print("*   PYTHON PASSWORD MANAGER TOOL   *")
-print("************************************")
+def print_header(title):
+    print("\n" + "*"*37)
+    print(f"{'*'*(12 + len(title))}\n*{title:^{35}}*")
+    print(f"{'*'*(12 + len(title))}\n" + "*"*37)
 
-print("\n*************************************")
-print("*Made by - Altamsh Bairagdar        *")
-print("*E-mail - bairagdaraltamsh@gmail.com*")
-print("*************************************")
+def string_to_hash_converter():
+    print("-"*36 + "\n1] String To Hash Converter\n")
+    user_input = input(">Enter Your String : ")
+    print("Processing......")
+    time.sleep(3)
+    hashed_value = hashlib.md5(user_input.encode()).hexdigest()
+    print(f"\nMd5 Value: {hashed_value}")
 
+def password_strength_checker():
+    print("-"*36 + "\n2] Password Strength Checker\n")
+    print("*Disclaimer: Password must contain Uppercase, Lowercase, Special Symbols, Digits and be greater than 8 characters*\n")
+    password = input(">Enter Your password : ")
 
-time.sleep(2)
-print("\n1.String To Hash Converter\n2.Password Strength Checker\n3.Random Password Genrator\n4.Create Strong Password")
+    requirements = [
+        any(char.isupper() for char in password),
+        any(char.islower() for char in password),
+        any(char.isdigit() for char in password),
+        any(char in "(){}[]\\|:;,.<>?/!@#%^&*-+=_" for char in password),
+        len(password) > 8
+    ]
 
+    if all(requirements):
+        print("\nPassword is Strong: " + password)
+    else:
+        print("Password is not Strong & does not meet all requirements!")
+        print("Try Again!")
 
-userinput = int(input("\n>Enter Your Choice : "))
+def random_password_generator():
+    print("-"*36 + "\n3] Random Password Generator\n")
+    pass_length = int(input(">Enter Password Length : "))
 
+    if pass_length <= 8:
+        print("Password must be greater than 8!")
+    else:
+        all_characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+={}[]\\|;:*'<>/?,."
+        password = "".join(random.sample(all_characters, pass_length))
 
+        print("Generating password.....\n")
+        time.sleep(2)
+        print(f"Password Is: {password}\n")
 
-def fun1():
-	print("------------------------------------")
-	print("\n1] String To Hash Converter \n")
+        for char in password:
+            time.sleep(0.3)
+            print(f"Shuffling password: {char}")
 
-	a = input(">Enter Your String : ")
-	print("Processing......")
-	time.sleep(3)
+        time.sleep(1)
+        shuffled_password = "".join(random.sample(password, pass_length))
+        print(f"\nRandom strong password is: {shuffled_password}")
 
-	c = hashlib.md5(a.encode())
-	b = c.hexdigest()
-	print("\nMd5 Value : "+b)
+def create_strong_password():
+    print("-"*36 + "\n4] Create Strong Password\n")
 
+    name = input(">Enter Any Name, Target Name (no commas): ")
+    pet_name = input(">Enter Any Pet Name (no commas): ")
+    nick_name = input(">Enter Any Nick Name, Fav movies, Organization: ")
+    birth_date = input(">Enter Any Birth Date (dd/mm/yy): ")
+    email_id = input(">Enter Any Email_Id Related To Target: ")
+    old_password = input(">Enter Any Old Password: ")
+    pass_length = int(input(">Enter Any Password length: "))
 
+    guess = name + pet_name + nick_name + birth_date + email_id + old_password
 
-def fun2():
-	print("------------------------------------")
-	print("\n2] Password Strength Checker\n")
+    if len(guess) <= 8:
+        print("\nPassword must be greater than 8!")
+    else:
+        print("\nCreating strong password...")
+        time.sleep(2)
+        strong_password = "".join(random.sample(guess, pass_length))
+        print(f"\nYour Strong Password Is: {strong_password}")
 
-	print("*Disclamair : Password must be contains Uppercase, Lowercase, Special \n Symbols, Digits and Greater than 8 Characters \n")
-	password = input(">Enter Your password : ")
+if __name__ == "__main__":
+    print("\n\n" + "*"*37)
+    print_header("PYTHON PASSWORD MANAGER TOOL")
+    print_header("Made by - Altamsh Bairagdar")
+    time.sleep(2)
+    print("\n1.String To Hash Converter\n2.Password Strength Checker\n3.Random Password Generator\n4.Create Strong Password")
 
-	upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	lower_case = "abcdefghijklmnopqrstuvwxyz"
-	special = "(){}[]\|:;,.<>?/!@#%^&*-+=_"
-	digits = "0123456789"
+    user_input = int(input("\n>Enter Your Choice : "))
 
-	length=len(password)
-
-	all = upper_case + lower_case + special + digits
-
-	if length <= 8 or password == all:
-		print("password is not Strong & not Contains all things ! ")
-		print("Try Again !")
-
-	else:
-		print("\nPassword is Strong : " +password)
-
-
-
-def fun3():
-
-	lower = "abcdefghijklmnopqrstuvwxyz"
-	upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	digits = "0123456789"
-	Symbol = "!@#$%^&*()_-+={}[]\|;:*'<>/?,."
-
-	all = lower + upper + digits + Symbol
-
-
-	print("------------------------------------")
-	print("\n3] Random Password Genrator\n")
-	passlength = int(input(">Enter Password Length : "))
-	
-	length = passlength
-
-	password = "".join(random.sample(all,length))
-
-	if passlength <= 8:
-		print("Password must be greater than 8 !")
-
-	else:
-		print("Genrating password.....\n")
-		time.sleep(2)
-		print("Password Is : "+password )
-		print("")
-
-
-		for i in range(passlength):
-			time.sleep(0.3)
-			print("Shuffling password : "+password[i])
-
-		time.sleep(1)
-		password2 = "".join(random.sample(password,length))
-		print("\nRandom strong password is : "+password2)
-
-
-def fun4():
-	
-	print("\n4] Create Strong Password \n")
-
-	name = input(">Enter Any Name ,Target Name (no commas) :")
-	pet_name = input(">Enter Any Pet Name (no commas) :")
-	nick_name = input(">Enter Any Nick Name , Fav movies, Organization :")
-	birth_Date = input(">Enter Any Birth Date (dd/mm/yy) :")
-	email_id = input(">Enter Any Email_Id Related To Target :")
-	old_password = input(">Enter Any Old Password :")
-	pass_length = int(input(">Enter Any Password length :"))
-
-	guess = name + pet_name + nick_name + birth_Date + email_id + old_password
-
-	length = pass_length
-
-	r1 = "".join(random.sample(guess,length))
-
-
-	if len(r1) <= 8:
-		print("\nPassword must be greater than 8 !")
-
-	else:
-		print("\nCreating strong password...")
-		time.sleep(2)
-		print("\nYour Strong Password Is :" + r1)
-		
-		
-	
-##########################################################
-
-if userinput == 1:
-	fun1()
-
-if userinput == 2:
-	fun2()
-
-if userinput == 3:
-	fun3()
-
-if userinput == 4:
-	fun4()
+    if user_input == 1:
+        string_to_hash_converter()
+    elif user_input == 2:
+        password_strength_checker()
+    elif user_input == 3:
+        random_password_generator()
+    elif user_input == 4:
+        create_strong_password()
