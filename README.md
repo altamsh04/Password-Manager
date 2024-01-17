@@ -11,6 +11,9 @@
 # Python Password Manager Tool
 A simple Python tool that provides various password-related functionalities, including string to hash conversion, password strength checking, random password generation, and creating strong passwords.
 
+## Technologies Used
+- Python
+  
 ## Libraries or Modules Used
 - hashlib: Used for string to hash conversion.
 - random: Used for generating random passwords.
